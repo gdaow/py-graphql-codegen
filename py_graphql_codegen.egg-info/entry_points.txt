@@ -1,0 +1,3 @@
+[console_scripts]
+graphql-codegen = graphql_codegen.main:main
+

@@ -1,0 +1,1 @@
+"""GraphQL codegen main package."""

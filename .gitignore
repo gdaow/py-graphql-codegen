@@ -1,0 +1,15 @@
+**/*.pyc
+**/__pycache__
+.coverage
+.env
+.static
+build
+ciukune.egg-info
+ciukune/core/static/ui
+coverage_html
+db.sqlite3
+dist
+geckodriver.log
+schema.graphql
+node_modules
+report.*

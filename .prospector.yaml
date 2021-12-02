@@ -1,0 +1,53 @@
+output-format: pylint
+strictness: veryhigh
+test-warnings: true
+doc-warnings: true
+
+ignore-paths:
+  - .env
+  - backup
+  - local-settings.py
+  - mobilidesk/migrations
+
+pylint:
+  run: true
+  disable:
+    - line-too-long # Already checked by pep8
+    - missing-class-docstring # To tolerate meta classes, not nested classes missing docs are checked by pep8
+    - too-few-public-methods # Lot of objects can have no method (Graphene Queries...)
+    - unsubscriptable-object # https://github.com/PyCQA/pylint/issues/3882
+    - too-many-ancestors # Some type in graphene-django-plus have a big inheritance chain
+    - too-many-arguments # Some resolve functions have a big number of optional arguments.
+
+mccabe:
+  run: true
+
+pep257:
+  run: true
+  disable:
+    - D102 # Missing docstring in public method : Not detecting inheritance, already better checked by pylint
+    - D106 # Missing docstring in public nested class : ignore for meta classes.
+    - D203 # 1 blank line required before class docstring, we put 0
+    - D213 # Multi-line comments should start at the second line, we require one blank line after the summary.
+
+pep8:
+  options:
+    max-line-length: 120
+  disable:
+    - E261 # At least two spaces before inline comment (we use 1)
+
+pyflakes:
+  run: true
+  disable:
+    - F401 # Module imported but not used. It can be usefull to import all child stuff in packages __init__.py
+
+pyroma:
+  run: true
+
+mypy:
+  run: true
+  options:
+    ignore-missing-imports: true
+    strict: true
+    plugins:
+      - mypy_drf_plugin.main

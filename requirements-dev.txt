@@ -1,0 +1,7 @@
+-e .
+mypy
+prospector
+pylint
+pyroma
+splinter
+types-setuptools

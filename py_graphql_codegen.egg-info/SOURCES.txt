@@ -1,0 +1,10 @@
+README.md
+setup.py
+graphql_codegen/__init__.py
+py_graphql_codegen.egg-info/PKG-INFO
+py_graphql_codegen.egg-info/SOURCES.txt
+py_graphql_codegen.egg-info/dependency_links.txt
+py_graphql_codegen.egg-info/entry_points.txt
+py_graphql_codegen.egg-info/not-zip-safe
+py_graphql_codegen.egg-info/requires.txt
+py_graphql_codegen.egg-info/top_level.txt
