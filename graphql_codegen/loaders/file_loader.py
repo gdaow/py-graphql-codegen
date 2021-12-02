@@ -1,17 +1,16 @@
 """Loader loading GraphQL documents from GraphQL definition files."""
 from typing import Iterable
-from pathlib import Path
 
 from graphql.language import parse
 from graphql.language.ast import DocumentNode
 
-from graphql_codegen.loaders.base import DocumentLoader
+from graphql_codegen.loaders.base import Loader
 
 
-class FileDocumentLoader(DocumentLoader):
+class FileLoader(Loader):
     """Loader loadng GraphQL documents from GraphQL definition files."""
 
-    def load(self, source: Path) -> Iterable[DocumentNode]:
+    def load(self, source: str) -> Iterable[DocumentNode]:
         with open(source, 'r', encoding='utf-8') as source_file:
             file_content = source_file.read()
             yield parse(file_content)

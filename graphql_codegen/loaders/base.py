@@ -3,14 +3,12 @@ from abc import abstractmethod
 from abc import ABC
 from typing import Iterable
 
-from pathlib import Path
-
 from graphql.language.ast import DocumentNode
 
 
-class DocumentLoader(ABC):
-    """Base class for document loader."""
+class Loader(ABC):
+    """Base class for loaders parsing GraphQL document from arbitrary source."""
 
     @abstractmethod
-    def load(self, source: Path) -> Iterable[DocumentNode]:
+    def load(self, source: str) -> Iterable[DocumentNode]:
         """Load the given source into GraphQL documents."""
