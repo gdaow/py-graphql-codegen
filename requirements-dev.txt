@@ -5,3 +5,4 @@ pylint
 pyroma
 splinter
 types-setuptools
+pytest
