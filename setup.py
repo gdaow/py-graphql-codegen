@@ -94,7 +94,7 @@ setup(
     package_data={'py-graphql-codegen': ['templates/**/*']},
     install_requires=[
         'graphql-core',
-        'jinja2'
+        'mako'
     ],
     zip_safe=False,
 )

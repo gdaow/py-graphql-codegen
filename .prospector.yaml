@@ -29,6 +29,7 @@ pep257:
     - D106 # Missing docstring in public nested class : ignore for meta classes.
     - D203 # 1 blank line required before class docstring, we put 0
     - D213 # Multi-line comments should start at the second line, we require one blank line after the summary.
+    - D407 # Missing dashed underline after section
 
 pep8:
   options:
