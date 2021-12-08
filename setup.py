@@ -67,8 +67,8 @@ setup(
     long_description_content_type="text/markdown",
     license='MIT',
     url='https://gitea.dont-nod.com/an-otter-world/py-graphql-codegen',
-    author='Dontnod Entertainment',
-    author_email='59399648+an-otter-world@users.noreply.github.com',
+    author='Corentin Séchet',
+    author_email='gdaow@users.noreply.github.com',
     packages=list(_find_packages('graphql_codegen')),
     entry_points={
         'console_scripts': [
