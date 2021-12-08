@@ -3,11 +3,10 @@ from typing import Iterable
 from typing import Optional
 
 from graphql.language.ast import OperationDefinitionNode
-from graphql.language.ast import FieldNode
-from graphql.language.ast import FragmentSpreadNode
 from graphql.type import GraphQLSchema
 
 from graphql_codegen.context.selection import Selection
+from graphql_codegen.context.selection import get_selection
 
 
 class Operation:
@@ -31,6 +30,4 @@ class Operation:
     @property
     def selection(self) -> Iterable[Selection]:
         """Return the operation's selection set."""
-        for node_it in self._node.selection_set.selections:
-            if isinstance(node_it, (FieldNode, FragmentSpreadNode)):
-                yield Selection(node_it, self._type)
+        return get_selection(self._node.selection_set, self._type)

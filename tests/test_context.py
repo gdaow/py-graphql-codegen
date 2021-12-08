@@ -7,7 +7,7 @@ from graphql_codegen.context.operation import Operation
 
 
 def test_scalar_field() -> None:
-    """Context should correctly expose fields declared in operations."""
+    """Context should correctly expose fields."""
     operation = _get_operation('query { version }')
 
     fields = list(operation.selection)
@@ -19,7 +19,7 @@ def test_scalar_field() -> None:
 
 
 def test_non_null_field() -> None:
-    """Context should correctly expose non-null fields declared in operations."""
+    """Context should correctly expose non-null fields."""
     operation = _get_operation('query { status }')
 
     fields = list(operation.selection)
@@ -28,6 +28,28 @@ def test_non_null_field() -> None:
     assert field.name == 'status'
     assert field.is_non_null
     assert field.type == 'String'
+
+
+def test_object_field() -> None:
+    """Context should correctly expose non-null object fields."""
+    operation = _get_operation('query { users { id, username, } }')
+
+    fields = list(operation.selection)
+    assert len(fields) == 1
+    field = fields[0]
+    assert field.name == 'users'
+    assert field.type == 'User'
+
+    fields = list(field.selection)
+    assert len(fields) == 2
+    id_field = fields[0]
+
+    assert id_field.name == 'id'
+    assert id_field.type == 'ID'
+
+    username_field = fields[1]
+    assert username_field.name == 'username'
+    assert username_field.type == 'String'
 
 
 def _get_root(document_string: str) -> Root:
