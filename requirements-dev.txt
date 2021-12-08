@@ -6,3 +6,4 @@ pyroma
 splinter
 types-setuptools
 pytest
+pytest-cov
