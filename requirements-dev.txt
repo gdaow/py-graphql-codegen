@@ -3,7 +3,8 @@ mypy
 prospector
 pylint
 pyroma
-splinter
-types-setuptools
 pytest
 pytest-cov
+pytest-datadir
+splinter
+types-setuptools
