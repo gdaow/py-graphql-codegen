@@ -32,5 +32,6 @@ type User {
 type Query {
     users: User
     version: String
+    status: String!
 }
 """
