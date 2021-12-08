@@ -6,5 +6,4 @@ pyroma
 pytest
 pytest-cov
 pytest-datadir
-splinter
 types-setuptools

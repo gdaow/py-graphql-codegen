@@ -44,7 +44,7 @@ jobs:
       run: pip install -r requirements-dev.txt
 
     - name: Run Unit Tests
-      run: pytest --cov-report term-missing
+      run: pytest --cov-report term-missing --cov=graphql_codegen
 
     - name: Upload Coverage
       if: matrix.python-version == '3.8'

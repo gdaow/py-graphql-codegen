@@ -15,6 +15,9 @@ def test_scalar_field() -> None:
     field = fields[0]
     assert field.name == 'version'
     assert not field.is_non_null
+    assert field.is_scalar
+    assert not field.is_fragment
+    assert not field.is_object
     assert field.type == 'String'
 
 
@@ -27,6 +30,9 @@ def test_non_null_field() -> None:
     field = fields[0]
     assert field.name == 'status'
     assert field.is_non_null
+    assert field.is_scalar
+    assert not field.is_fragment
+    assert not field.is_object
     assert field.type == 'String'
 
 
@@ -39,6 +45,9 @@ def test_object_field() -> None:
     field = fields[0]
     assert field.name == 'users'
     assert field.type == 'User'
+    assert field.is_object
+    assert not field.is_fragment
+    assert not field.is_scalar
 
     fields = list(field.selection)
     assert len(fields) == 2

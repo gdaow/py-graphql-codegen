@@ -42,12 +42,12 @@ class Selection:
     @property
     def is_scalar(self) -> bool:
         """Return true if the current selection is a scalar field."""
-        return isinstance(self._node, FieldNode) and isinstance(self.type, GraphQLScalarType)
+        return isinstance(self._node, FieldNode) and isinstance(self._type, GraphQLScalarType)
 
     @property
     def is_object(self) -> bool:
         """Return true if the current selection is an object field."""
-        return isinstance(self._node, FieldNode) and isinstance(self.type, GraphQLObjectType)
+        return isinstance(self._node, FieldNode) and isinstance(self._type, GraphQLObjectType)
 
     @property
     def is_fragment(self) -> bool:

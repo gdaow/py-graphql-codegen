@@ -1,13 +1,3 @@
-
-query tweets {
-  Tweets {
-    id,
-    body
-  }
-}
-
-query currentUser2 {
-  currentUser {
-    email
-  }
+query getVersion {
+  version
 }
