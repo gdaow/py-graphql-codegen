@@ -25,5 +25,7 @@ def _test_template(datadir: Path, template_name: str) -> None:
 
     out_path = datadir / 'expected-outputs' / template_name
     with open(out_path, 'r', encoding='utf-8') as out:
+        with open('out', 'w') as out_file:
+            out_file.write(result)
         expected_output = out.read()
         assert expected_output == result

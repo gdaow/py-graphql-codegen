@@ -18,3 +18,8 @@ def camel(text: str) -> str:
             result = result + char
 
     return result
+
+
+def indent(text: str) -> str:
+    """Return the given string in camel case."""
+    return text.replace('\n', '\n     ')

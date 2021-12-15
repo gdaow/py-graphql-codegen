@@ -1,7 +1,0 @@
-  interface GetVersionQuery {
-        version: String,
-}
-
-  interface SetStatusMutation {
-        setStatus: String,
-}
