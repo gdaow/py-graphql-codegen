@@ -2,6 +2,7 @@
 from typing import Iterable
 from typing import Optional
 
+from graphql.language.ast import OperationType
 from graphql.language.ast import DocumentNode
 from graphql.language.ast import OperationDefinitionNode
 from graphql.type import GraphQLSchema
@@ -21,8 +22,21 @@ class Root:
         self._schema = schema
 
     @property
-    def operations(self) -> Iterable[Operation]:
+    def queries(self) -> Iterable[Operation]:
         """Return all operations defined in the AST."""
+        return self._get_operations(OperationType.QUERY)
+
+    @property
+    def mutations(self) -> Iterable[Operation]:
+        """Return all operations defined in the AST."""
+        return self._get_operations(OperationType.MUTATION)
+
+    @property
+    def subscriptions(self) -> Iterable[Operation]:
+        """Return all operations defined in the AST."""
+        return self._get_operations(OperationType.SUBSCRIPTION)
+
+    def _get_operations(self, operation_type: OperationType) -> Iterable[Operation]:
         for node_it in self._ast.definitions:
-            if isinstance(node_it, OperationDefinitionNode):
+            if isinstance(node_it, OperationDefinitionNode) and node_it.operation == operation_type:
                 yield Operation(node_it, self._schema)

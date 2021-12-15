@@ -1,3 +1,7 @@
 query getVersion {
   version
 }
+
+mutation setStatus {
+  setStatus(status: "new_status") 
+}

@@ -3,6 +3,7 @@ from typing import Iterable
 from typing import Optional
 
 from graphql.language.ast import OperationDefinitionNode
+from graphql.language.ast import OperationType
 from graphql.type import GraphQLSchema
 
 from graphql_codegen.context.selection import Selection
@@ -16,8 +17,14 @@ class Operation:
         """Initialize the root context."""
         self._node = node
         self._schema = schema
-        assert schema.query_type is not None # TODO: Raise error instead
-        self._type = schema.query_type
+        if node.operation == OperationType.QUERY:
+            self._type = schema.query_type
+        elif node.operation == OperationType.MUTATION:
+            self._type = schema.mutation_type
+        else:
+            self._type = schema.mutation_type
+
+        assert self._type is not None
 
     @property
     def name(self) -> Optional[str]:
@@ -28,6 +35,18 @@ class Operation:
         return name_node.value
 
     @property
+    def type(self) -> str:
+        """Return the type Query / Mutation / Subscription of the operation."""
+        operation_type = self._node.operation
+        if operation_type == OperationType.QUERY:
+            return 'Query'
+        if operation_type == OperationType.MUTATION:
+            return 'Mutation'
+        assert operation_type == OperationType.SUBSCRIPTION
+        return 'Subscription'
+
+    @property
     def selection(self) -> Iterable[Selection]:
         """Return the operation's selection set."""
+        assert self._type is not None
         return get_selection(self._node.selection_set, self._type)
