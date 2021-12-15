@@ -71,6 +71,19 @@ def test_operations(shared_datadir: Path) -> None:
     assert mutation.name == 'testMutation'
 
 
+def test_fragments(shared_datadir: Path) -> None:
+    """Context should correctly return fragments."""
+    root = _get_root(shared_datadir, 'fragment testFragment on User { id, username, }')
+    fragments = list(root.fragments)
+    assert len(fragments) == 1
+    fragment = fragments[0]
+    assert fragment.name == 'testFragment'
+    fields = list(fragment.selection)
+    assert len(fields) == 2
+    assert fields[0].name == 'id'
+    assert fields[1].name == 'username'
+
+
 def _get_root(shared_datadir: Path, document_string: str) -> Root:
     document = parse_append_schema(shared_datadir, document_string)
     return Root(document)

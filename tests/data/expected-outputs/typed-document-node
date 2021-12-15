@@ -1,7 +1,22 @@
-  interface GetVersionQuery {
-        version: String,
+
+
+
+    
+interface GetVersionQuery {
+version: String
 }
 
-  interface SetStatusMutation {
-        setStatus: String,
+    
+interface GetAllUsersQuery {
+users: {
+...userProfile
 }
+
+}
+
+
+    
+interface SetStatusMutation {
+setStatus: String
+}
+
