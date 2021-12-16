@@ -114,6 +114,33 @@ def test_variables(shared_datadir: Path) -> None:
     assert variable.is_list
 
 
+def test_source(shared_datadir: Path) -> None:
+    """Context should correctly return all kinds of operations."""
+    query = _get_query(shared_datadir, """
+        type OtherDefinition {
+            id: Int
+        }
+
+        query testQuery {
+            users {
+                id
+                username
+            }
+        }
+
+        type AgainOtherDefinition {
+            id: Int
+        }
+        """)
+    assert query.name == 'testQuery'
+    assert query.source == """query testQuery {
+            users {
+                id
+                username
+            }
+        }"""
+
+
 def _get_root(shared_datadir: Path, document_string: str) -> Root:
     document = parse_append_schema(shared_datadir, document_string)
     return Root(document)

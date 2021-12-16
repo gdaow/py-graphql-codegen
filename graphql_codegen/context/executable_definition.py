@@ -44,3 +44,12 @@ class ExecutableDefinition:
         """Return the operation's selection set."""
         for node_it in self._node.variable_definitions:
             yield Variable(node_it)
+
+    @property
+    def source(self) -> str:
+        """Return the operation's original definition."""
+        location = self._node.loc
+        assert location is not None
+        start = location.start
+        end = location.end
+        return location.source.body[start:end]
