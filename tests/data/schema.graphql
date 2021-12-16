@@ -11,3 +11,7 @@ type Query {
     version: String
     status: String!
 }
+
+type Mutation {
+  setStatus(status: String!): String
+}

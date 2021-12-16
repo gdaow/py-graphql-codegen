@@ -13,6 +13,8 @@ from graphql.type import GraphQLSchema
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
+from graphql_codegen.context.filters import camel
+from graphql_codegen.context.filters import indent
 from graphql_codegen.context.root import Root
 
 
@@ -37,7 +39,11 @@ def generate(
     """
     root = Root(ast, schema)
     with _get_template(template) as mako_template:
-        return cast(str, mako_template.render(root=root))
+        return cast(str, mako_template.render(
+            root=root,
+            camel=camel,
+            indent=indent
+        ))
 
 
 @contextmanager

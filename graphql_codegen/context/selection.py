@@ -69,7 +69,7 @@ class Selection:
     def selection(self) -> Iterable['Selection']:
         """Return selection for this field if it's an object field."""
         assert isinstance(self._node, FieldNode) # TODO : Throw an error
-        assert self._node.selection_set is not None # Don't know how it'd be possible
+        assert self._node.selection_set is not None
         assert isinstance(self._type, GraphQLObjectType)
         return get_selection(self._node.selection_set, self._type)
 

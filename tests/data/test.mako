@@ -1,5 +1,5 @@
-% for operation in root.operations:
-%   for selection in operation.selection:
+% for query in root.queries:
+%   for selection in query.selection:
 ${selection.name}:${selection.type}
 %   endfor
 % endfor
