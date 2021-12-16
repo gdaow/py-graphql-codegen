@@ -7,6 +7,7 @@ from graphql.type import GraphQLSchema
 from graphql.type import GraphQLObjectType
 
 from graphql_codegen.context.selection import Selection
+from graphql_codegen.context.variable import Variable
 from graphql_codegen.context.selection import get_selection
 
 
@@ -37,3 +38,9 @@ class ExecutableDefinition:
         """Return the operation's selection set."""
         assert self._type is not None
         return get_selection(self._node.selection_set, self._type)
+
+    @property
+    def variables(self) -> Iterable[Variable]:
+        """Return the operation's selection set."""
+        for node_it in self._node.variable_definitions:
+            yield Variable(node_it)

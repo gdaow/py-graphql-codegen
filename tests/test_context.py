@@ -84,6 +84,36 @@ def test_fragments(shared_datadir: Path) -> None:
     assert fields[1].name == 'username'
 
 
+def test_variables(shared_datadir: Path) -> None:
+    """Context should correctly return all kinds of variables."""
+    mutation = _get_mutation(shared_datadir, """
+        scalar Int
+        mutation testMutation($intVar: Int, $nonNullVar: Int!, $listVar: [Int]) {
+            setStatus(status: "new_status")
+        }
+    """)
+    assert mutation.name == 'testMutation'
+    variables = list(mutation.variables)
+    assert len(variables) == 3
+    variable = variables[0]
+    assert variable.name == 'intVar'
+    assert variable.type_name == 'Int'
+    assert not variable.is_non_null
+    assert not variable.is_list
+
+    variable = variables[1]
+    assert variable.name == 'nonNullVar'
+    assert variable.type_name == 'Int'
+    assert variable.is_non_null
+    assert not variable.is_list
+
+    variable = variables[2]
+    assert variable.name == 'listVar'
+    assert variable.type_name == 'Int'
+    assert not variable.is_non_null
+    assert variable.is_list
+
+
 def _get_root(shared_datadir: Path, document_string: str) -> Root:
     document = parse_append_schema(shared_datadir, document_string)
     return Root(document)
